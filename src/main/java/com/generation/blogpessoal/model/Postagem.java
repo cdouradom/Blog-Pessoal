@@ -4,11 +4,14 @@ import java.time.LocalDateTime; // Importa a classe para trabalhar com data e ho
 
 import org.hibernate.annotations.UpdateTimestamp;  // Importa a anotação para atualizar o timestamp automaticamente
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column; // Importa a anotação para definir propriedades da coluna no banco de dados
 import jakarta.persistence.Entity; // Importa a anotação para definir uma entidade JPA
 import jakarta.persistence.GeneratedValue; // Importa a anotação para definir a estratégia de geração de valores
 import jakarta.persistence.GenerationType; // Importa a enumeração para estratégias de geração de valores
 import jakarta.persistence.Id; // Importa a anotação para definir a chave primária
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table; // Importa a anotação para definir o nome da tabela no banco de dados
 import jakarta.validation.constraints.NotBlank; // Importa a anotação para validação de campos não vazios
 import jakarta.validation.constraints.Size; // Importa a anotação para validação de tamanho de campos
@@ -35,6 +38,11 @@ public class Postagem { // Define a classe Postagem
 	@UpdateTimestamp // Atualiza a data e hora automaticamente sempre que houver uma atualização na postagem
 	private LocalDateTime data;  // Define o atributo data como LocalDateTime // Guarda tanto a data quanto a hora
 	
+	@ManyToOne // Define o relacionamento um-para-muitos com Postagem)
+	@JsonIgnoreProperties("postagem")
+	private Tema tema; // Define o atributo postagem como uma lista de Postagem
+	
+	
 	// Métodos Getters e Setters
 	public Long getId() {
 		return id;
@@ -59,6 +67,12 @@ public class Postagem { // Define a classe Postagem
 	}
 	public void setData(LocalDateTime data) {
 		this.data = data;
+	}
+	public Tema getTema() {
+		return tema;
+	}
+	public void setTema(Tema tema) {
+		this.tema = tema;
 	}
 		
 }
