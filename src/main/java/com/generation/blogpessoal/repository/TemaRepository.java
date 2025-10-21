@@ -7,12 +7,11 @@ import org.springframework.data.repository.query.Param; // Importa a anotação 
 
 import com.generation.blogpessoal.model.Tema;// Importa a classe Tema da model
 
-
 //Com qual model (tabela) essa Interface irá trabalhar, Long como a chave primária, no nosso caso é o id
 // JpaRepository já possui vários métodos prontos para serem usados (CRUD)
 public interface TemaRepository extends JpaRepository<Tema, Long>{ // Define a interface PostagemRepository que estende JpaRepository 
 	
-	// Query Methods
+		// Query Methods
 	public List<Tema> findAllByDescricaoContainingIgnoreCase(@Param("descricao")String descricao); // Método para buscar postagens por descricao, ignorando maiúsculas e minúsculas
 
 }

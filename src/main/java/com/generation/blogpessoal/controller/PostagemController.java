@@ -20,7 +20,7 @@ import org.springframework.web.server.ResponseStatusException; // Importa a clas
 
 import com.generation.blogpessoal.model.Postagem; // Importa a classe Postagem da model
 import com.generation.blogpessoal.repository.PostagemRepository; // Importa a interface PostagemRepository da repository
-import com.generation.blogpessoal.repository.TemaRepository;
+import com.generation.blogpessoal.repository.TemaRepository; // Importa a interface TemaRepository da repository
 
 import jakarta.validation.Valid; // Importa a anotação Valid para validação de dados
 
@@ -62,7 +62,7 @@ public class PostagemController { // Define a classe PostagemController
 			postagem.setId(null); // Garante que o ID seja nulo para criar uma nova postagem
 			return ResponseEntity.status(HttpStatus.CREATED).body(postagemRepository.save(postagem)); // Salva a postagem e retorna com status 201 (Created)
 		}
-		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Este Tema inexistente", null); // Se o tema não existir, lança uma exceção com status 400 (Bad Request)
+		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema inexistente", null); // Se o tema não existir, lança uma exceção com status 400 (Bad Request)
 		// equivalente ao INSERT INTO tb_postagens (data, texto, titulo, tema) VALUES (current_timestamp(), 'Texto', 'Titulo', 'Tema');
 	}
 
@@ -72,7 +72,7 @@ public class PostagemController { // Define a classe PostagemController
 			if (temaRepository.existsById(postagem.getTema().getId())) { // Verifica se o tema associado à postagem existe
 				return ResponseEntity.status(HttpStatus.OK).body(postagemRepository.save(postagem)); // Se ambos existirem, atualiza a postagem e retorna com status 200 (OK)
 			}
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Este Tema inexistente", null);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema inexistente", null);
 		}
 		return ResponseEntity.notFound().build(); // Se a postagem não existir, retorna status 404 (Not Found)	
 		// equivalente ao UPDATE tb_postagens SET data = current_timestamp(), texto = 'Texto', titulo = 'Titulo', tema = 'Tema' WHERE id = ?;
