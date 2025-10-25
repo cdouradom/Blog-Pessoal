@@ -34,11 +34,11 @@ public class UsuarioController { // Início da classe UsuarioController
         return ResponseEntity.ok(usuarioService.getAll()); // Retorna a lista de todos os usuários com status HTTP 200 (OK)
     }
 
-    @GetMapping("id") // Mapeia requisições HTTP GET para o caminho "/id"
-    public ResponseEntity<Usuario> getById(@PathVariable Long id) { // Método para obter um usuário pelo seu ID
-        return usuarioService.getById(id) // Chama o serviço para obter o usuário pelo ID
-                .map(resposta -> ResponseEntity.ok(resposta)) // Se o usuário for encontrado, retorna com status HTTP 200 (OK)
-                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build()); // Se o usuário não for encontrado, retorna status HTTP 404 (Not Found)
+    @GetMapping("/id/{id}") // Mapeia requisições HTTP GET para o caminho "/id"
+    public ResponseEntity<Usuario> getById(@PathVariable Long id) { 
+        return usuarioService.getById(id) 
+                .map(resposta -> ResponseEntity.ok(resposta)) 
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build()); 
     }
 
     @PostMapping("/cadastrar") // Mapeia requisições HTTP POST para o caminho "/cadastrar"

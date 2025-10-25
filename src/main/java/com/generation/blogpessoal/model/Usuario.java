@@ -4,6 +4,7 @@ import java.util.List; // Importa a classe List para manipular listas de objetos
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties; // Importa a anotação JsonIgnoreProperties para evitar problemas de serialização JSON
 
+import io.swagger.v3.oas.annotations.media.Schema; // 
 import jakarta.persistence.CascadeType; // Importa a enumeração CascadeType para definir o comportamento de cascata nas operações de banco de dados
 import jakarta.persistence.Entity; // Importa a anotação Entity para marcar a classe como uma entidade JPA
 import jakarta.persistence.FetchType; // Importa a enumeração FetchType para definir o tipo de carregamento das associações
@@ -28,6 +29,7 @@ public class Usuario { // Define a classe Usuario
     @Size(min = 2, max = 100, message = "O Nome deve conter no mínimo 2 e no máximo 100 caracteres") // Valida o tamanho do campo nome
     private String nome; // Declara o campo nome do tipo String
 
+    @Schema(example = "email@email.com.br")
     @NotBlank(message = "O Atributo Usuário é Obrigatório!") // Valida que o campo usuario não pode estar em branco
     @Email(message = "O Atributo Usuário deve ser um email válido!") // Valida que o campo usuario deve ser um email válido
     private String usuario; // Declara o campo usuario do tipo String
