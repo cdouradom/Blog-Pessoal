@@ -17,39 +17,30 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 
 @Configuration
 public class SwaggerConfig {
-
-    @Bean
-    public OpenAPI springBlogPessoalOpenAPI(){
-        final String securitySchemeName = "jwt_auth";
-
-        SecurityScheme jwtScheme = new SecurityScheme()
-            .name(securitySchemeName)
-            .type(SecurityScheme.Type.HTTP)
-            .scheme("bearer")
-            .bearerFormat("JWT");
-            
+	 
+	@Bean
+    OpenAPI springblogpessoalOpenAPI() {
         return new OpenAPI()
             .info(new Info()
                 .title("Projeto Blog Pessoal")
-                .description("Projeto Blog Pessoal - Cintia Dourado")
+                .description("Projeto Blog Pessoal - Generation Brasil")
                 .version("v0.0.1")
                 .license(new License()
                     .name("Cintia Dourado")
-                    .url("https://github.com/cdouradom"))
+                    .url("https://github.com/cdouradom/Blog-Pessoal"))
                 .contact(new Contact()
                     .name("Cintia Dourado")
                     .url("https://github.com/cdouradom")
                     .email("cdouradom@gmail.com")))
-
             .externalDocs(new ExternalDocumentation()
                 .description("Github")
                 .url("https://github.com/cdouradom/Blog-Pessoal/blob/main/README.md"))
             .components(new Components()
-                .addSecuritySchemes(securitySchemeName, jwtScheme))
-            .addSecurityItem(new SecurityRequirement().addList(securitySchemeName));
+                    .addSecuritySchemes("jwt_auth", createSecurityScheme()))
+                .addSecurityItem(new SecurityRequirement().addList("jwt_auth"));
     }
-        
-    @Bean
+
+	@Bean
 	OpenApiCustomizer customerGlobalHeaderOpenApiCustomiser() {
 
 		return openApi -> {
